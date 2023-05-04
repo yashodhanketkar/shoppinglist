@@ -56,7 +56,7 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">SR</th>
               <th scope="col">Name</th>
               <th scope="col">Nos</th>
               <th scope="col">Purchased</th>
@@ -71,7 +71,6 @@
               <th>{{$counter}}</th>
               <td>{{$item->item}}</td>
               <td>{{$item->nos}}</td>
-              <td>{{$item->created_at}}</td>
               <td>
                 @if($item->is_purchased)
                 <div class="badge bg-success">Purchased</div>
@@ -80,8 +79,8 @@
                 @endif
               </td>
               <td>
-                <a href="{{route('items.edit',['item'=>$item->id])}}" class="btn btn-info">Edit</a>
-                <a href="" class="btn btn-info">Delete</a>
+                <a href="{{route('items.edit',['item'=>$item->id])}}" class="btn btn-outline-primary">Edit</a>
+                <a href="{{route('items.destroy',['item'=>$item->id])}}" class="btn btn-outline-danger">Delete</a>
               </td>
             </tr>
             @php $counter++; @endphp

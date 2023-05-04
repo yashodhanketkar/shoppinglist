@@ -19,5 +19,13 @@ Route::get('/', function () {
 
 Route::resource(
     'items',
-        \App\Http\Controllers\ItemController::class
+    \App\Http\Controllers\ItemController::class
 );
+
+Route::get(
+    'items/{item}',
+    [
+        \App\Http\Controllers\ItemController::class,
+        'destroy'
+    ]
+)->name('items.destroy');

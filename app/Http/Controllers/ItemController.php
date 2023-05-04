@@ -62,7 +62,8 @@ class ItemController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = Item::where('id', $id)->first();
+        return view('edit-items', compact('item'));
     }
 
     /**
@@ -70,7 +71,22 @@ class ItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'item' => 'required',
+            'nos' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('items.edit', ['item' => $id])->withErrors($validator);
+        }
+
+        $item = Item::where('id', $id)->first();
+        $item->item = $request->get('item');
+        $item->nos = $request->get('nos');
+        $item->is_purchased = $request->get('is_purchased');
+        $item->save();
+
+        return redirect()->route('items.index')->with('success', 'Updated item');
     }
 
     /**
@@ -78,6 +94,7 @@ class ItemController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Item::where('id', $id)->delete();
+        return redirect()->route('items.index')->with('success', 'Deleted item');
     }
 }
