@@ -49,6 +49,49 @@
     </form>
   </div>
 
+  <div class="text-center">
+    <h2>All Items</h2>
+    <div class="row justiy-content-center">
+      <div class="col-lg-6">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Nos</th>
+              <th scope="col">Purchased</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @php $counter=1 @endphp
+
+            @foreach($items as $item)
+            <tr>
+              <th>{{$counter}}</th>
+              <td>{{$item->item}}</td>
+              <td>{{$item->nos}}</td>
+              <td>{{$item->created_at}}</td>
+              <td>
+                @if($item->is_purchased)
+                <div class="badge bg-success">Purchased</div>
+                @else
+                <div class="badge bg-warning">Not Purchased</div>
+                @endif
+              </td>
+              <td>
+                <a href="{{route('items.edit',['item'=>$item->id])}}" class="btn btn-info">Edit</a>
+                <a href="" class="btn btn-info">Delete</a>
+              </td>
+            </tr>
+            @php $counter++; @endphp
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
